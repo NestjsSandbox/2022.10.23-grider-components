@@ -1,0 +1,55 @@
+<table [ngClass]="classNames" class="ui table">
+  <thead>
+    <tr>
+      <th *ngFor="let item of headers">{{ item.label }}</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let record of data">
+              <!-- {{ record | json }} -->
+
+      <!--
+           Using record[header.key] triggers this TS error:
+         Element implicitly has an 'any' type because expression of type 'string' 
+         can't be used to index type 'MyData'.
+           No index signature with a parameter of type 'string' was found on
+         type 'MyData'.ngtsc(7053)
+        The error is caused because the combination of these things:
+          (1) In the collections.module we declared an interface for MyData whose 
+              properties are 'name','age','job' . And an interface named MyHeaders whose
+              properties are 'key' , 'label'.
+
+          (2) In the collections-home.component.ts we use the created an instance 
+              for MyData named 'data' and an instance for MyHeaders named headers.
+
+          (3) The speacial thing is that the values we gave to the headers.key is 'name',
+              why is this speacial ? Because the same syntax is the property of the 'data' instance.
+          
+          (4) This causes an error when here in the table.component.html we try to use the values 
+              of the 'headers.key' to find the index of the property with the same name in data.
+              The annotation causing the error is:  record[header.key]
+              In this record[header.key] header.key gets a value of 'name' and of type 'string',
+              but but a string cannot be used as an index. record[index: string] is not allowed.
+
+          (5) The fix has something to do with using 'typeof' and associating 'name' from type MyHeaders
+              as number index and not as a string. 
+              I need to do some focus work on this until it works.
+      -->
+
+
+      <!-- <td *ngFor="let header of headers">
+        {{ record[header.key] }}
+      </td> -->
+
+      <!-- 
+        The following is a fallback solution until I get the 'record[header.key]' to work 
+      -->
+
+      <td>{{record.name}}</td>
+      <td>{{record.age}}</td>
+      <td>{{record.job}}</td>
+
+    </tr>
+  </tbody>
+</table>

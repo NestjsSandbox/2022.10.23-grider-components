@@ -1,0 +1,21 @@
+<app-my-widget>Table Component</app-my-widget>
+
+<app-table class="striped celled" [data]="data" [headers]="headers">
+</app-table>
+
+<app-my-widget>Tab Menu</app-my-widget>
+
+<app-tabs>
+    <a class="item" 
+    [routerLink]="['./']"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+     >Biography
+   </a>
+   <a class="item" routerLink="./companies" routerLinkActive="active"
+     >Companies</a
+   >
+   <a class="item" routerLink="./partners" routerLinkActive="active"
+     >Partners</a
+   >
+</app-tabs>

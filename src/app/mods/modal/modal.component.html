@@ -1,0 +1,32 @@
+<div (click)="onCloseModalClick()" class="ui dimmer visible active">
+  <div (click)="$event.stopPropagation()" class="ui modal visible active">
+    <i (click)="onCloseModalClick()" class="close icon"></i>
+    <div class="header">
+      <ng-content select="[modal-header]"></ng-content>
+    </div>
+    <div class="content">
+      <ng-content select="[modal-content]"></ng-content>
+    </div>
+
+    <!-- The div with the acions-default class will be the one displayed if 
+        the other div with the actions only class doesnt exist (the developer
+        did not add it to this html code.)
+        You can test this by commenting out, in the parent html, the "actions" only div and see that 
+        the default is displayed. 
+        In any case only one of the two are displayed.
+        The logic for this is in the css style modal.component.style
+          -->
+          
+          <div class="actions">
+            <ng-content select="[modal-footer]"></ng-content>
+          </div>
+          
+          <div class="actions actions-default">
+            <button (click)="onCloseModalClick()" class="ui button">
+              The default button
+            </button>
+          </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,37 @@
+.actions:empty {
+    /*This is a selector with 'actions' class that is empty, i.e. has no child, no content inside it */
+    /*In our modal.comp..html this is the div with the ng-content, if the developer */
+    /* does not give content to the ng-content then this div will not be displayed*/
+
+    display: none; /*Do not display the elment with this selector if it is empty*/
+}
+
+
+.actions-default {
+    /* This means that always hide the elment with actions-default.*/
+    /* The exception case is descried in the following rule*/
+    
+    display: none; /*Do not display the elment with this selector if it is empty*/
+}
+
+.actions:empty + .actions-default {
+    /*
+       This is a case that causes the default to be shown when the actions is empty.
+       FYI: WARNING:
+         The order is very important.
+         The operator '+' works like this:
+            (1) It checks if the first div it mencounters in the html answers 
+              the condition .actions:empty (if the elment with the actions class is empty)
+            (2) Then it checks the element IMMEDIATLY following if it has a class of 'actions-default'
+            (3) Only if both these conditions are met the it will apply the style to the SECOND 
+                element i.e. tagged with class 'actions-default'.
+
+        Potential problem: Pay close attention to the order in the html of the two consequitive divs,
+        if they are not in the order of this css selector then the selector ignores this case.
+        The display will not be affected as desired.
+    */
+
+    display: block;
+}
+
+

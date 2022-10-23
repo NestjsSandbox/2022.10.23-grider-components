@@ -1,0 +1,20 @@
+<app-my-widget>Mods Component</app-my-widget>
+<button class="button" (click)="onClick()">Show Modal</button>
+
+<app-modal (close)="onClick()" *ngIf="isModalOpen">
+    <div modal-header>
+        This is the header from mods-home
+    </div>
+
+    <div modal-content>
+        <p> This is the modal content</p>
+    </div>
+
+    <div modal-footer>
+        <button (click)="onClick()" class="ui button">Custom button</button>
+    </div>
+</app-modal>
+
+<app-my-widget>Accordion Component</app-my-widget>
+<app-accordion [appAccordionItems]="accordionItems"></app-accordion>
+
